@@ -1,0 +1,3 @@
+module Gino
+  VERSION = "0.0.1"
+end
