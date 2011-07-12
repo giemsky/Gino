@@ -1,3 +1,5 @@
 module Gino
-  # Your code goes here...
+  
 end
+
+Gino.autoload 'Client', File.expand_path(File.dirname(__FILE__) + '/gino/client/generators/git_hook')
