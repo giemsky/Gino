@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "Gino/version"
+require "gino/version"
 
 Gem::Specification.new do |s|
-  s.name        = "Gino"
+  s.name        = "gino"
   s.version     = Gino::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Grzegorz Miklaszewski"]
@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.summary     = %q{Gem for tracking git changes by user}
   s.description = %q{}
 
-  s.rubyforge_project = "Gino"
+  s.rubyforge_project = "gino"
 
   s.add_development_dependency('rake')  
   s.add_development_dependency('test-unit')

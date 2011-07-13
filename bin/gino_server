@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+trap(:INT) { exit 0 }
+
+puts "Running Gino Server..."
