@@ -14,18 +14,16 @@
 
 require 'net/http'
 
-REPOSITORY = "<%= repository_name %>"
-PATH = File.expand_path(File.dirname("../#{__FILE__}"))
+REPOSITORY_NAME = "<%= repository_name %>"
 API_URL = "<%= api_uri %>"
 
-oldrev, newrev, refname = $stdin.read.split(/\s*/)
+oldrev, newrev, refname = $stdin.read.split(/\s+/)
 
 post_data = {
-  :commit => {
-    :oldrev => oldrev,
-    :newrev => newrev,
-    :refname => refname
-  }
+  "oldrev" => oldrev,
+  "newrev" => newrev,
+  "refname" => refname,
+  "repository_name" => REPOSITORY_NAME
 }
 
 response = Net::HTTP.post_form(URI.parse(API_URL), post_data)
