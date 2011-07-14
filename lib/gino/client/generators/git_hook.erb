@@ -12,9 +12,11 @@
 # see contrib/hooks/ for a sample, or uncomment the next line and
 # rename the file to "post-receive".
 
+require 'net/http'
+
 REPOSITORY = "<%= repository_name %>"
 PATH = File.expand_path(File.dirname("../#{__FILE__}"))
-API_URL = "<%= api_url %>"
+API_URL = "<%= api_uri %>"
 
 oldrev, newrev, refname = $stdin.read.split(/\s*/)
 
