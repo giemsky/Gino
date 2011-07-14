@@ -2,12 +2,16 @@ require 'gino/storage/repository'
 require 'gino/storage/update'
 require 'pstore'
 require 'json'
+require 'fileutils'
 
 module Gino
   module Storage
     extend self
-    
-    @pstore = PStore.new("data/repositories")
+  
+    STORE_PATH = ENV["HOME"] + "/.gino"
+        
+    FileUtils.mkdir_p(STORE_PATH) unless File.directory?(STORE_PATH)
+    @pstore = PStore.new(STORE_PATH + "/repositories")
     
     def find_repository(name)
       @pstore.transaction(true) do
@@ -22,18 +26,19 @@ module Gino
       create_dump
     end
     
-    def as_json(*a)
+    def to_json
       output = Array.new
       @pstore.transaction(true) do
         @pstore.roots.each do |name|
-          output << @pstore[name].to_json(*a)
+          output << @pstore[name]
         end
       end
-      output.to_json(*a)
+
+      output.to_json
     end
     
     def create_dump
-      File.open(File.expand_path(File.dirname(__FILE__) + '/data/dump.json'), 'w') do |f|
+      File.open(STORE_PATH + '/dump.json', 'w') do |f|
         f.write to_json
       end
     end

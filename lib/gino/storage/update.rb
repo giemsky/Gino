@@ -17,13 +17,13 @@ module Gino
           @refname = other_update.refname
       end
       
-      def as_json(*a)
+      def to_json(*a)
         {
-          :oldrev => @oldrev.to_json(*a),
-          :newrev => @newrev.to_json(*a),
-          :refname => @refname.to_json(*a),
-          :created_at => @created_at.to_json(*a)
-        }
+          :oldrev => @oldrev,
+          :newrev => @newrev,
+          :refname => @refname,
+          :created_at => @created_at
+        }.to_json
       end
     end
   end

@@ -27,12 +27,12 @@ module Gino
         Gino::Storage.save_repository(self)
       end
       
-      def as_json(*a)
+      def to_json(*a)
         {
-          :name => @name.to_json(*a),
-          :path => @path.to_json(*a),
-          :updates => @updates.to_json(*a)
-        }
+          :name => @name,
+          :path => @path,
+          :updates => @updates
+        }.to_json
       end
     end
   end
