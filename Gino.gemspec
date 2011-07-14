@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency('rake')  
   s.add_development_dependency('test-unit')
+  s.add_runtime_dependency('rack')
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

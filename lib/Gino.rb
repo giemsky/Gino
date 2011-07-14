@@ -2,5 +2,5 @@ module Gino
   
 end
 
-Gino.autoload 'Client', 'gino/client/generators/git_hook'
-
+require 'gino/client/generators/git_hook'
+require 'gino/server/rack_app'

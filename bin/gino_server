@@ -1,4 +1,14 @@
 #!/usr/bin/env ruby
-trap(:INT) { exit 0 }
 
-puts "Running Gino Server..."
+require 'gino'
+require 'rack'
+
+options = {
+  :Host => 'localhost',
+  :Port => 9001,
+  :config => File.expand_path(File.dirname(__FILE__) + '/../lib/gino/server/config.ru')
+}
+
+puts "Starting Gino Server on http://#{options[:Host]}:#{options[:Port]}"
+
+Rack::Server.start(options)
