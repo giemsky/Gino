@@ -1,3 +1,5 @@
+TEST = true
+
 require 'test/unit'
 require 'gino'
 
@@ -6,5 +8,9 @@ class Test::Unit::TestCase
     @repository = Gino::Storage::Repository.new("some repo", "/var/lib/repo")
     @update = Gino::Storage::Update.new("aa453216d1b3e49e", "68f7abf4e6f9", "refs/heads/master")
     @repository << @update
+  end
+  
+  def create_subscription
+    @subscription = Gino::Storage::Subscription.new('mail@example.org')
   end
 end

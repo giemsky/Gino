@@ -1,5 +1,6 @@
 require 'gino/storage/repository'
 require 'gino/storage/update'
+require 'gino/storage/subscription'
 require 'pstore'
 require 'json'
 require 'fileutils'
@@ -9,28 +10,48 @@ module Gino
     extend self
   
     STORE_PATH = ENV["HOME"] + "/.gino"
+    DB_FILE = STORE_PATH + "/repositories"
         
-    FileUtils.mkdir_p(STORE_PATH) unless File.directory?(STORE_PATH)
-    @pstore = PStore.new(STORE_PATH + "/repositories")
+    FileUtils.mkdir_p(STORE_PATH)
+    File.delete(DB_FILE) if defined?(TEST) && File.exists?(DB_FILE)
+    @pstore = PStore.new(DB_FILE)
     
-    def find_repository(name)
+    @pstore.transaction do
+      @pstore[:repositories] ||= Hash.new
+      @pstore[:subscriptions] ||= Hash.new
+    end
+    
+    def find_repository(uuid)
       @pstore.transaction(true) do
-        @pstore[name]
+        @pstore[:repositories][uuid]
       end
     end
     
     def save_repository(repository)
       @pstore.transaction do 
-        @pstore[repository.name] = repository
+        @pstore[:repositories][repository.uuid] = repository
+      end
+      create_dump
+    end
+    
+    def subscriptions
+      @pstore.transaction(true) do
+        @pstore[:subscriptions].values
+      end
+    end
+    
+    def save_subscription(subscription)
+      @pstore.transaction do 
+        @pstore[:subscriptions][subscription.uuid] = subscription
       end
       create_dump
     end
     
     def to_json
-      output = Array.new
+      output = Hash.new
       @pstore.transaction(true) do
         @pstore.roots.each do |name|
-          output << @pstore[name]
+          output[name] = @pstore[name]
         end
       end
 

@@ -14,7 +14,7 @@
 
 require 'net/http'
 
-REPOSITORY_NAME = "<%= repository_name %>"
+REPOSITORY_UUID = "<%= repository_uuid %>"
 API_URL = "<%= api_uri %>"
 
 oldrev, newrev, refname = $stdin.read.split(/\s+/)
@@ -23,7 +23,7 @@ post_data = {
   "oldrev" => oldrev,
   "newrev" => newrev,
   "refname" => refname,
-  "repository_name" => REPOSITORY_NAME
+  "repository_uuid" => REPOSITORY_UUID
 }
 
 response = Net::HTTP.post_form(URI.parse(API_URL), post_data)

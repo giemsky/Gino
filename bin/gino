@@ -11,8 +11,10 @@ api_url = ARGV[4]
 
 abort "Invalid path" unless File.directory?(path)
 
-Gino::Generators::GitHook.generate(name, path, api_url)
-Gino::Storage::Repository.new(name, path).save
+repository = Gino::Storage::Repository.new(name, path)
+repository.save
+Gino::Generators::GitHook.generate(repository.uuid, repository.path, api_url)
+
 
 puts "Git hook generated in #{path}"
 exit

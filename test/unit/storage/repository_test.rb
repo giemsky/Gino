@@ -8,7 +8,7 @@ class RepositoryTest < Test::Unit::TestCase
   
   def test_save
     assert @repository.save
-    assert_equal @repository, Gino::Storage::Repository.find(@repository.name)
+    assert_equal @repository, Gino::Storage::Repository.find(@repository.uuid)
   end
   
   def test_to_json

@@ -5,7 +5,7 @@ require 'net/http'
 module Gino
   module Generators
     module GitHook
-      def self.generate(repository_name, repository_path, api_url)
+      def self.generate(repository_uuid, repository_path, api_url)
         filepath = File.join(repository_path, "hooks/post-receive")
         template = File.read(File.expand_path(File.dirname(__FILE__) + '/git_hook.erb'))
         
