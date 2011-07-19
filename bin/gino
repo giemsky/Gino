@@ -1,20 +1,3 @@
 #!/usr/bin/env ruby
 require 'gino'
-
-abort %{
-  Usage: gino repository add NAME PATH API_URL
-} if ARGV[0] != 'repository' && ARGV[1] != 'add' && ARGV.size != 5
-
-name = ARGV[2]
-path = ARGV[3]
-api_url = ARGV[4]
-
-abort "Invalid path" unless File.directory?(path)
-
-repository = Gino::Storage::Repository.new(name, path)
-repository.save
-Gino::Generators::GitHook.generate(repository.uuid, repository.path, api_url)
-
-
-puts "Git hook generated in #{path}"
-exit
+Gino::Client.execute(ARGV)

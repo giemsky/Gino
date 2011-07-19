@@ -27,3 +27,4 @@ post_data = {
 }
 
 response = Net::HTTP.post_form(URI.parse(API_URL), post_data)
+puts response.body
