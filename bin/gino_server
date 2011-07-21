@@ -2,7 +2,6 @@
 
 require 'gino'
 require 'rack'
-require 'optparse'
 
 options = {
   :Host => Gino::Server::Config::HOST,

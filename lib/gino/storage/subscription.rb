@@ -39,7 +39,7 @@ module Gino
       private
     
       def generate_uuid
-        @uuid = UUIDTools::UUID.timestamp_create
+        @uuid = UUIDTools::UUID.timestamp_create.to_s
       end
       
     end

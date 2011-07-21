@@ -34,6 +34,12 @@ module Gino
       create_dump
     end
     
+    def repositories
+      @pstore.transaction(true) do
+        @pstore[:repositories].values
+      end
+    end
+    
     def subscriptions
       @pstore.transaction(true) do
         @pstore[:subscriptions].values
@@ -45,6 +51,19 @@ module Gino
         @pstore[:subscriptions][subscription.uuid] = subscription
       end
       create_dump
+    end
+    
+    def remove_subscription(subscription)
+      @pstore.transaction do 
+        @pstore[:subscriptions].delete(subscription.uuid)
+      end
+      create_dump
+    end
+    
+    def find_subscription(uuid)
+      @pstore.transaction(true) do
+        @pstore[:subscriptions][uuid]
+      end
     end
     
     def to_json
