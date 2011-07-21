@@ -4,8 +4,8 @@ require 'gino'
 require 'rack'
 
 options = {
-  :Host => Gino::Server::Config::HOST,
-  :Port => Gino::Server::Config::PORT,
+  :Host => Gino::Config::SERVER[:host],
+  :Port => Gino::Config::SERVER[:port],
   :config => File.expand_path(File.dirname(__FILE__) + '/../lib/gino/server/config.ru')
 }
 

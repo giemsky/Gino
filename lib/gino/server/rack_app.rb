@@ -20,6 +20,7 @@ module Gino
         
         repository << update
         repository.save
+        Gino::Notificator.notify(repository, update)
       end
         
       # Call is the entry point for all rack apps.

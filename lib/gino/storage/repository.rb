@@ -1,4 +1,5 @@
 require 'uuidtools'
+require 'grit'
 
 module Gino
   module Storage
@@ -38,6 +39,10 @@ module Gino
       
       def new_record?
         !uuid
+      end
+      
+      def grit_repo
+        @grit_repo ||= Grit::Repo.new(path, :is_bare => true)
       end
       
       def to_json(*a)
