@@ -7,17 +7,11 @@ module Gino
         def self.execute(args)
           return unless args.first == 'list'
           
-          options = {}
-          OptionParser.new do |opts|
-            opts.banner = "Usage: gino subscription list [options]"
-
-            opts.on("-u", "--user USER_EMAIL", "Show for user") do |user|
-              options[:user] = user
-            end
-          end.parse!
+          opts = Hash.new
+          options(opts).parse!
 
           subscriptions = Gino::Storage.subscriptions
-          subscriptions = subscriptions.select{|s| s.user_email == options[:user]} if options[:user]
+          subscriptions = subscriptions.select{|s| s.user_email == opts[:user]} if opts[:user]
           
           puts "Current subscriptions:"
           subscriptions.each do |s|
@@ -26,6 +20,21 @@ module Gino
 
           exit
         end
+        
+        def self.options(options = {})
+          OptionParser.new do |opts|
+            opts.banner = "  gino subscription list [options]"
+
+            opts.on("-u", "--user USER_EMAIL", "Show for user") do |user|
+              options[:user] = user
+            end
+          end
+        end
+        
+        def self.usage
+          "List subscriptions\n#{options}\n"
+        end
+        
       end
     end
   end

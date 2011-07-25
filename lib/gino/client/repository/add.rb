@@ -20,6 +20,11 @@ module Gino
           puts "Git hook generated in #{path}"
           exit
         end
+        
+        def self.usage
+          "Add new repository\n  gino repository add NAME PATH API_URL\n"
+        end
+        
       end
     end
   end

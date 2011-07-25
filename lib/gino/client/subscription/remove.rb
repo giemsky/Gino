@@ -16,6 +16,11 @@ module Gino
           puts "Subscription removed for user #{subscription.user_email}" 
           exit
         end
+        
+        def self.usage
+          "Remove subscription\n  gino subscription remove ID\n"
+        end
+        
       end
     end
   end

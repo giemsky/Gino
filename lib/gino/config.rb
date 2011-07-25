@@ -3,6 +3,8 @@ require 'yaml'
 module Gino
   module Config
     file = ENV["HOME"] + "/.ginorc"
+    
+    abort "No configuration file: #{file}" unless File.exists?(file)
     config = YAML::load_file(file)
     
     SERVER = {

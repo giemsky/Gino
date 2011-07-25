@@ -15,6 +15,11 @@ module Gino
           puts "Subscription added for user #{user_mail}"
           exit
         end
+        
+        def self.usage
+          "Add new subscription\n  gino subscription add USER_EMAIL\n"
+        end
+        
       end
     end
   end
