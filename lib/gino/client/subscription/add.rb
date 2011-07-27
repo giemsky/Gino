@@ -2,6 +2,8 @@ module Gino
   module Client
     module Subscription
       module Add
+        Gino::Client::Subscription.register_command(self)
+        
         def self.execute(args)
           return unless args.first == 'add'
 

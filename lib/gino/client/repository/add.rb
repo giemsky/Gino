@@ -2,6 +2,8 @@ module Gino
   module Client
     module Repository
       module Add
+        Gino::Client::Repository.register_command(self)
+                
         def self.execute(args)
           return unless args.first == 'add'
           

@@ -1,18 +1,16 @@
-require 'gino/client/subscription'
-require 'gino/client/repository'
+require 'gino/client/command'
 
 module Gino
   module Client
-    ALL = [
-      Subscription,
-      Repository
-    ]
+    extend Command
+    
+    @commands = []
   
     def self.execute(args)
       opts = Hash.new
       options(opts).parse!
       
-      ALL.each{|e| e.execute(args)} if opts.empty?
+      @commands.each{|e| e.execute(args)} if opts.empty?
       
       Kernel.abort Gino::VERSION if opts[:version]
       abort
@@ -21,7 +19,7 @@ module Gino
     def self.abort
       output = String.new
       output << usage
-      output << ALL.map(&:usage).join
+      output << @commands.map(&:usage).join
       Kernel.abort output
     end
     
@@ -43,3 +41,6 @@ module Gino
     
   end
 end
+
+require 'gino/client/subscription'
+require 'gino/client/repository'
