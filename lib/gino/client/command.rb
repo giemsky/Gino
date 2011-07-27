@@ -7,9 +7,9 @@ module Gino
       end
       
       def usage
-        @commands.inject("") do |output, command|
-          output << "#{command.usage}\n"
-        end
+        output = ""
+        @commands.each{ |command| output << "#{command.usage}\n" }
+        output
       end
       
       def execute_subcommand(args)

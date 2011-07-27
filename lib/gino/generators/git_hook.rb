@@ -13,7 +13,7 @@ module Gino
         api_uri.path = '/' if api_uri.path.empty?
         
         File.open(filepath, 'w', 0755) do |f|
-          f.write ERB.new(template).result binding
+          f.write ERB.new(template).result(binding)
         end
       end
     end

@@ -11,7 +11,7 @@ module Gino
           from    Gino::Config::EMAIL[:from]
           to      recipients
           subject Gino::Config::EMAIL[:subject]
-          body    ERB.new(template).result binding
+          body    ERB.new(template).result(binding)
         end
         
       end
